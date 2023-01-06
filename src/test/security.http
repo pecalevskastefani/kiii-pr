@@ -1,0 +1,25 @@
+### login sucess
+POST http://localhost:9090/login
+Content-Type: application/json
+
+{"username":"admin","password":"admin"}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var jwt=response.body
+  client.global.set("jwt", response.body)
+});
+%}
+
+###
+
+GET http://localhost:9090/api/manufacturers
+Authorization: Bearer {{jwt}}
+
+
+###
+
+
+
+
